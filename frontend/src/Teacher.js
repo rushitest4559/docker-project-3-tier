@@ -29,11 +29,9 @@ function Teacher() {
   const [loading, setLoading] = useState(false);
   const toast = useToast();
 
-  const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
-
   const getData = () => {
     setLoading(true);
-    fetch(`${API_BASE_URL}/teacher`)
+    fetch(`/api/teacher`)
       .then((res) => res.json())
       .then((res) => {
         console.log('Fetched teachers:', res);
@@ -60,7 +58,7 @@ function Teacher() {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(teacherData),
     };
-    fetch(`${API_BASE_URL}/addteacher`, requestOptions)
+    fetch(`/api/addteacher`, requestOptions)
       .then((res) => res.json())
       .then(() => {
         toast({ title: 'Teacher added', status: 'success' });
@@ -71,7 +69,7 @@ function Teacher() {
   };
 
   const handleDelete = (id) => {
-    fetch(`${API_BASE_URL}/teacher/${id}`, { method: 'DELETE' })
+    fetch(`/api/teacher/${id}`, { method: 'DELETE' })
       .then((res) => res.json())
       .then(() => {
         toast({ title: 'Deleted', status: 'info' });
