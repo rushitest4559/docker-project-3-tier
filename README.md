@@ -79,4 +79,18 @@ verify if it is running or not, if not running then check logs
 d ps
 d logs frontend
 ```
-now you should see all 3 containers are running successfully and we open hostPort and do port binding only for frontend container because we uses nginx proxy in frontend to send /api requests to backend container and / requests to frontend container
+now you should see all 3 containers are running successfully and we open hostPort and do port binding only for frontend container because we uses nginx proxy in frontend to send /api requests to backend container and / requests to frontend container. so we don't make our backend container public, all requests first come to frontend container then if this requests come from / path then nginx sends /usr/share/nginx/html as response and if requests come from /api/ then nginx sends this request to backend container internally.
+
+now click the menu button at top right corner of killercoda website inside ubuntu playground and click open port, enter hostPort (external) port of frontend container and now you can see our website in browser successfully, you could go to teacher or student page and try adding data.
+
+In this project we used persistent volumes from host so even if database container deleted and we started new container then also our data will be persisted.
+so after adding some data from website, delete the database container.
+```bash
+d rm -f database
+```
+then go to our webpage and go to home page then again goto teacher or student page. you should see error now.
+and start it again
+```bash
+d run -d --name=database --network=mynet -v myvol:/bitnami/mariadb -e MARIADB_ROOT_PASSWORD=mypass bitnami/mariadb:latest
+```
+and again go to website and you could see our data we added previously with old database container. so our data is persisted outside container.
