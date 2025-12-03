@@ -88,9 +88,13 @@ now you should see all 3 containers are running successfully and we open hostPor
 
 now click the menu button at top right corner of killercoda website inside ubuntu playground and click Traffic/Ports, enter hostPort (external) port of frontend container in custom ports and click Access and now you can see our website in browser successfully, you could go to teacher or student page and try adding data.
 
-![open-1](screenshots/open-1.PNG)
+![open-1](screenshots/open-1.PNG)  
 
-![open-2](screenshots/open-2.PNG)
+![open-2](screenshots/open-2.PNG)  
+
+![website-home](screenshots/website-home.PNG)  
+
+![website-student](screenshots/website-student.PNG)  
 
 In this project we used persistent volumes from host so even if database container deleted and we started new container then also our data will be persisted.
 so after adding some data from website, delete the database container.
@@ -107,9 +111,8 @@ d run -d --name=database --network=mynet -v myvol:/bitnami/mariadb -e MARIADB_RO
 ```
 and again go to website, go to main domain(remove all routes, means go to home page) and you could see our data we added previously with old database container. so our data is persisted outside container.
 
-![website-home](screenshots/website-home.PNG)
-![website-student](screenshots/website-student.PNG)
 
-**_[docker files explaination](docs/doc1.md)_**
-**_[communication between containers](docs/doc2.md)_**
+
+**_[docker files explaination](docs/doc1.md)_**  
+**_[communication between containers](docs/doc2.md)_**  
 **_[traffic flow from client to data](docs/doc3.md)_**
