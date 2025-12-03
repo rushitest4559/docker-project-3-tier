@@ -25,7 +25,7 @@ This is our backend dockerfile, this image consists of 2 steps:
 For running backend server we need node dependencies and we don't have to build code here, so therefore we skip multi stage build here.
 
 COPY package*.json ./
-RUN npm ci --only=production && npm cache clean --force  
+RUN npm ci --only=production && npm cache clean --force    
 This lines in dockerfile does our first step which is installing dependencies, we only copy package.json and package-lock.json files here instead of copying all files because if we copy everything then even small changes in code reinstall all dependencies next time building image, so this approach makes our build faster next time for code changes until actually our dependencies are not modified.
 
 After that we copy all files, we use *entrypoint*.sh script which purpose is make sure user enter environment variables values before starting container.
